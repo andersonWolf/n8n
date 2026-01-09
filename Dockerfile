@@ -1,10 +1,10 @@
 FROM n8nio/n8n:latest
 
-# 切到 root 才能安裝套件
 USER root
 
-# Alpine 用 apk 安裝 ffmpeg
-RUN apk update && apk add --no-cache ffmpeg
+# Debian/Ubuntu 用 apt-get 安裝 ffmpeg
+RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
 
 # 裝完切回 node
 USER node
